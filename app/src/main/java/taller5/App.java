@@ -26,6 +26,31 @@ public class App {
     
     */ 
 
+    public static int aleatorio(int nro) {
+
+        try {
+
+            int random = 0;
+            int contador = 0;
+            
+            do {
+
+             random = (int)(Math.random() * (9999 - 1000) + 1000 + 1);
+             contador ++;
+
+
+            } while (nro != random);
+
+            return contador;
+
+
+        } catch (Exception e) {
+             
+            return -1;
+        }
+
+    }
+
 
 
 
@@ -62,6 +87,43 @@ public class App {
       
     */
 
+    public static String Simular_ventas() {
+
+        final int doce = 12;
+        double ventas_total = 0, ventas_mensual = 0;
+        String resultado = "";
+        DecimalFormat form_pesos = new DecimalFormat("$#,###.00");
+
+        try {
+            
+            for (byte i = 1; i <= doce; i++) {
+
+                resultado += "Año " + i + "\n \n";
+
+                for (byte j = 1; j <= doce; j++) {
+
+                    ventas_mensual = Math.random() * 10001;
+                    resultado += "Mes " + j + ": " + form_pesos.format(ventas_mensual)  +"\n" ;
+                    ventas_total += ventas_mensual;
+
+
+                }
+
+                resultado += "\n Total ventas en el Año " + i +": " + form_pesos.format(ventas_total) + "\n \n";
+
+
+            }
+
+            return resultado;
+
+        } catch (Exception e) {
+            
+            return "Ocurrio un error";
+
+        }
+
+    }
+
     
 
 
@@ -85,6 +147,48 @@ public class App {
 
 
     */
+
+     public static String Calcular_empaque(int cantidadBombillas) {
+
+        
+        try {
+
+            int bombillasPorCaja = 30;
+            int cajasPorPallet = 16;
+            int cajasNecesarias = (int) Math.ceil((double) cantidadBombillas / bombillasPorCaja);
+            int palletsNecesarios = (int) Math.ceil((double) cajasNecesarias / cajasPorPallet);
+            int bombillasSinEmpacar = cantidadBombillas % bombillasPorCaja;
+            String resultado = "";
+            resultado += "Para " + cantidadBombillas + " bombillas, se necesitan " 
+                         + cajasNecesarias + " cajas y " + palletsNecesarios + " pallets. ";
+            resultado += "Se quedan " + bombillasSinEmpacar + " bombillas sin empacar.\n";
+            resultado += "Se empacará así:\n";
+            
+            int cajaActual = 1;
+            for (int pallet = 1; pallet <= palletsNecesarios; pallet++) {
+                resultado += "Pallet " + pallet + " --> ";
+                for (int caja = 1; caja <= cajasPorPallet && cajaActual <= cajasNecesarias; caja++) {
+                    if (caja > 1) resultado += ", ";
+                    resultado += "Caja " + cajaActual;
+                    cajaActual++;
+                }
+                resultado += "\n";
+            }
+            
+            return resultado;
+        
+            
+
+
+        } catch (Exception e) {
+
+            return "error";
+            
+        }
+            
+
+
+    }
 
 
 
@@ -111,6 +215,56 @@ public class App {
 
 
     */
+
+    public static String Jugar_21(int jugadores) {
+
+        try {
+        
+        final byte nro_ini = 1, max_j = 6, max_cart = 10, gana_juego = 21;
+        int carta1 = 0, carta2 = 0, carta3 = 0, suma_tot = 0;
+        String resultado = "";
+
+
+        if (jugadores >= nro_ini && jugadores <= max_j) {
+
+            for (byte i = 1; i <= jugadores; i++) {
+
+                carta1 = (int)(Math.random() * ((max_cart - nro_ini) + nro_ini + nro_ini));
+                carta2 = (int)(Math.random() * ((max_cart - nro_ini) + nro_ini + nro_ini));
+                carta3 = (int)(Math.random() * ((max_cart - nro_ini) + nro_ini + nro_ini));
+                suma_tot = carta1 + carta2 + carta3;
+
+                resultado += "Jugador "+ i + ", puntos " + suma_tot + " -- > ";
+
+                if (suma_tot < gana_juego) {
+
+                    resultado += "Faltaron puntos";
+
+                } else if (suma_tot == gana_juego) {
+
+                    resultado += "juego perfecto";
+
+                } else if (suma_tot > gana_juego) {
+
+                    resultado += "se paso";
+
+                }
+                resultado += "\n";
+            }
+        }
+
+        return resultado;
+            
+
+
+        } catch (Exception e) {
+            
+
+            return "error";
+        }
+
+
+    }
 
 
 
